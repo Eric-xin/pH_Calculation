@@ -1,5 +1,5 @@
-# 🧪 pH Calculation 🤖
-### Comprehensive Analysis of Acid-Base Equilibria Using MBE, CBE, and PBE
+# 🧪 pH Calculation 🤖 <!-- omit in toc -->
+### Comprehensive Analysis of Acid-Base Equilibria Using MBE, CBE, and PBE <!-- omit in toc -->
 
 [![Python](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![Jupyter](https://img.shields.io/badge/jupyter-1.0.0-blue.svg)](https://jupyter.org/)
@@ -10,9 +10,29 @@ This repository contains the code and data used in the paper "Comprehensive Anal
 
 The paper is available in the `documents` folder, and the compiled pKa data used in the calculations is available in the `pKa_data` folder.
 
-Want to read the paper? [Click here](documents/doc.pdf).
+📄 Want to read the paper? [**Click here**](https://phcal.ericxin.eu/doc/doc.pdf)
 
-Also there is an online version of the paper available on [Click here](https://ph_calc.ericxin.eu).
+🌐 Prefer the online version? [**Click here**](https://phcal.ericxin.eu)
+
+## Table of contents
+
+- [Table of contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Theory](#theory)
+  - [Acid-Base Reactions and Equilibria in Solution](#acid-base-reactions-and-equilibria-in-solution)
+  - [Equilibrium Constants](#equilibrium-constants)
+  - [Material Balance Equation (MBE)](#material-balance-equation-mbe)
+  - [Charge Balance Equation (CBE)](#charge-balance-equation-cbe)
+  - [Proton Balance Equation (PBE)](#proton-balance-equation-pbe)
+  - [Calculate the pH](#calculate-the-ph)
+- [Installation](#installation)
+- [Running the Code](#running-the-code)
+- [Code Structure](#code-structure)
+- [Examples](#examples)
+  - [Example 1: CBE calculation of 0.01 M HCl](#example-1-cbe-calculation-of-001-m-hcl)
+  - [Example 2: CBE calculation of 0.01 M (NH4)2(HPO4)](#example-2-cbe-calculation-of-001-m-nh42hpo4)
+- [Contact](#contact)
+- [License](#license)
 
 ## Introduction
 
@@ -31,7 +51,7 @@ $$
 where $\gamma_i$ is the activity coefficient. For dilute solutions, the Debye-Hückel equation can be used to approximate the activity coefficient:
 
 $$
-- \log \gamma_i = \frac{0.51 z_i^2 \sqrt{I}}{1 + B a_i \sqrt{I}}
+-\log \gamma_i = \frac{0.51 z_i^2 \sqrt{I}}{1 + B a_i \sqrt{I}}
 $$
 
 where $z_i$ is the charge of ion $i$, $B$ is a constant, $a_i$ is the ion volume parameter, and $I$ is the ionic strength of the solution.
@@ -87,7 +107,22 @@ Here is an example of the PBE curve for a solution of $\text{(NH4)}_3\text{(PO4)
 
 ![PBE Curve](assets/img/PBE.png)
 
-> For more details, please refer to the paper at [documents/doc.pdf](documents/doc.pdf).
+### Calculate the pH
+
+Not that we have the equations, we can calculate the pH of a solution using the CBE or PBE method. The general steps are as follows:
+1. Define the acid and base species in the solution, including their charges, concentrations, and pKa values.
+2. Calculate the equilibrium concentrations of all species using the MBE.
+3. Use the CBE or PBE to calculate the Error function, which is a measure of the deviation from charge balance or proton balance.
+4. Use an optimization algorithm to minimize the Error function and find the pH of the solution.
+5. Output the pH value and other relevant information about the acid-base system.
+
+Below is a diagram of the absolute error of CBE for a solution of $\text{(NH4)}_3\text{(PO4)}$:
+
+![CBE Error](assets/img/CBE_error.png)
+
+We can easily find the point where CBE_error = 0 by using the minimization algorithm or gradient descent. The pH value at this point is the pH of the solution.
+
+> For more details, please refer to the paper at [documents/doc.pdf](documents/doc.pdf) or the online version at [phcal.ericxin.eu](https://phcal.ericxin.eu).
 
 ## Installation
 
