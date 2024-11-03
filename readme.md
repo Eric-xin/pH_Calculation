@@ -25,7 +25,8 @@ The paper is available in the `documents` folder, and the compiled pKa data used
   - [Charge Balance Equation (CBE)](#charge-balance-equation-cbe)
   - [Proton Balance Equation (PBE)](#proton-balance-equation-pbe)
   - [Calculate the pH](#calculate-the-ph)
-- [Installation](#installation)
+- [Installation through pip](#installation-through-pip)
+- [Installation through github repository](#installation-through-github-repository)
 - [Running the Code](#running-the-code)
 - [Code Structure](#code-structure)
 - [Examples](#examples)
@@ -124,7 +125,12 @@ We can easily find the point where CBE_error = 0 by using the minimization algor
 
 > For more details, please refer to the paper at [documents/doc.pdf](documents/doc.pdf) or the online version at [phcal.ericxin.eu](https://phcal.ericxin.eu).
 
-## Installation
+## Installation through pip
+```sh
+pip install phcal == 0.1.0
+```
+
+## Installation through github repository
 
 1. Clone the repository:
     ```sh
@@ -184,13 +190,20 @@ The code is organized as follows:
 **Charge Balance Equation (CBE) Calculation**
 
 ```python
-from calculation import *
+from calculation import CBE_Inert, CBE_calc
 
 HCl = CBE_Inert(charge=-1, conc=0.01)
 pH = CBE_calc(HCl)
 pH.pH_calc()
 
 print(pH.pH) # the result should be 1.9999977111816385
+```
+
+*Note: if you are using the python package, you should import from `phcal` instead of `calculation`.*
+
+```python
+from phcal import CBE_Inert, CBE_calc
+...
 ```
 
 **Proton Balance Equation (PBE) Calculation**
@@ -208,9 +221,10 @@ print(calc.pH)
 
 **Charge Balance Equation (CBE) Calculation**
 ```python
-NH4 = Acid(charge=1, conc=0.01*3, pKa=9.25)
+from calculation import CBE_Acid, CBE_calc
+NH4 = CBE_Acid(charge=1, conc=0.01*3, pKa=9.25)
 pKa = [1.97, 6.82, 12.5]
-P = Acid(charge=0, conc=0.01, pKa=pKa)
+P = CBE_Acid(charge=0, conc=0.01, pKa=pKa)
 
 pH = CBE_calc(NH4, P)
 pH.pH_calc()
