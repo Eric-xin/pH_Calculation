@@ -29,8 +29,8 @@ The paper is available in the `documents` folder, and the compiled pKa data used
 - [Running the Code](#running-the-code)
 - [Code Structure](#code-structure)
 - [Examples](#examples)
-  - [Example 1: CBE calculation of 0.01 M HCl](#example-1-cbe-calculation-of-001-m-hcl)
-  - [Example 2: CBE calculation of 0.01 M (NH4)2(HPO4)](#example-2-cbe-calculation-of-001-m-nh42hpo4)
+  - [Example 1: Calculation of 0.01 M HCl](#example-1-calculation-of-001-m-hcl)
+  - [Example 2: Calculation of 0.01 M (NH4)2(HPO4)](#example-2-calculation-of-001-m-nh42hpo4)
 - [Contact](#contact)
 - [License](#license)
 
@@ -179,22 +179,34 @@ The code is organized as follows:
 
 ## Examples
 
-**Note: currently only CBE package is available for general use. PBE package is still under development. Code in PBE_investigation.ipynb is for demonstration on Ammonium Phosphate system only.**
+### Example 1: Calculation of 0.01 M HCl
 
-### Example 1: CBE calculation of 0.01 M HCl
+**Charge Balance Equation (CBE) Calculation**
 
 ```python
 from calculation import *
 
-HCl = Inert(charge=-1, conc=0.01)
+HCl = CBE_Inert(charge=-1, conc=0.01)
 pH = CBE_calc(HCl)
 pH.pH_calc()
 
 print(pH.pH) # the result should be 1.9999977111816385
 ```
 
-### Example 2: CBE calculation of 0.01 M (NH4)2(HPO4)
+**Proton Balance Equation (PBE) Calculation**
 
+```python
+from calculation import PBE_Inert
+HCl = PBE_Inert(conc=0.01, proton=1, proton_ref=1)
+# HCl = PBE_Acid(conc=0.01, Ka=100000, proton=1, proton_ref=1)
+calc = PBE_calc(HCl)
+calc.pH_calc()
+print(calc.pH)
+```
+
+### Example 2: Calculation of 0.01 M (NH4)2(HPO4)
+
+**Charge Balance Equation (CBE) Calculation**
 ```python
 NH4 = Acid(charge=1, conc=0.01*3, pKa=9.25)
 pKa = [1.97, 6.82, 12.5]
@@ -206,7 +218,20 @@ pH.pH_calc()
 print(pH.pH) # the result should be 8.952952575683597
 ```
 
-For more examples, see the Jupyter notebooks.
+**Proton Balance Equation (PBE) Calculation**
+```python
+from calculation import PBE_Acid, PBE_calc
+
+NH4 = PBE_Acid(conc=0.01 * 3, pKa=9.25, proton=1, proton_ref=1)
+pKa = [1.97, 6.82, 12.5]
+P = PBE_Acid(conc=0.01, pKa=pKa, proton=3, proton_ref=0)
+calc = PBE_calc(NH4, P)
+calc.pH_calc()
+
+print(calc.pH)
+```
+
+> For more examples, see the Jupyter notebooks. 'CBE.ipynb' for CBE calculations and 'PBE.ipynb' for PBE calculations.
 
 ## Contact
 
