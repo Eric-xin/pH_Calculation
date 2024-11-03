@@ -1,6 +1,6 @@
 import numpy as np
 
-class Inert:
+class CBE_Inert:
     def __init__(self, charge, conc=None):
         if charge is None:
             raise ValueError("The charge for this ion must be defined.")
@@ -14,7 +14,7 @@ class Inert:
 # Actually 'Intert' is a subclass of 'Acid'. It is a special case of an acid with Ka = inf. Ka = inf means that the acid is completely dissociated in water. That is why the alpha of 'Inert' is always the same and equal to 1.
 
 
-class Acid:
+class CBE_Acid:
     def __init__(self, Ka=None, pKa=None, charge=None, conc=None):
         if Ka is None and pKa is None:
             raise ValueError("You must define either Ka or pKa values.")

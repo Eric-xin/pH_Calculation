@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.optimize import minimize
-from .CBE_Acids import *
+from PBE_Acids import *
 
 class PBE_calc:
     def __init__(self, *species, Kw=1.01e-14):
