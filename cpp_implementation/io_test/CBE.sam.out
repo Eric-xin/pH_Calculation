@@ -1,0 +1,38 @@
+The program is running...
+Program name: Calculation of pH with Charge Balance Equation (CBE)
+Author: Eric Xin
+----------------------------------------
+Please enter the number of components: Confirmed, the number of components is 2.
+----------------------------------------
+Now please enter the information for each component.
+Using Ka or pKa values? (1 for Ka, 2 for pKa): Please enter the number of pKa values: Please enter the pKa values: Please enter the charge of the acid: Please enter the concentration of the acid: Using Ka or pKa values? (1 for Ka, 2 for pKa): Please enter the number of pKa values: Please enter the pKa values: Please enter the charge of the acid: Please enter the concentration of the acid: ----------------------------------------
+Please enter the value of Kw: (input 0 for default value 1.01e-14): Using default value of Kw: 1.01e-14
+----------------------------------------
+All parameters are set. Estimating the initial pH...
+Calculating pH...
+----------------------------------------
+The pH is: 8.95358
+----------------------------------------
+Do you want a calculation report? (1 for yes, 0 for no): Here is a digest of all the components:
+----------------------------------------
+For component No. 1:
+pKa values: 1.97 6.82 12.50 
+Charge: 0
+Concentration: 1.00e-02
+Component with charge 0 and concentration 1.00e-02
+Alpha values: at equilibrium pH = 8.95358
+Alpha_0: 0.00000
+Alpha_-1: 0.00730
+Alpha_-2: 0.99242
+Alpha_-3: 0.00028
+----------------------------------------
+For component No. 2:
+pKa values: 9.25 
+Charge: 1
+Concentration: 3.00e-02
+Component with charge 1 and concentration 3.00e-02
+Alpha values: at equilibrium pH = 8.95358
+Alpha_1: 0.66431
+Alpha_0: 0.33569
+----------------------------------------
+Thank you for using the program. Goodbye!
