@@ -132,7 +132,16 @@ class PBE_calc {
         for (int i = 0; i < max_iterations && diff > tol; ++i) {
             double gradient = (PBE_error(pH + tol) - diff) / tol;  // Numerical gradient
             pH -= learning_rate * gradient;                        // Update pH using gradient descent
-            diff = PBE_error(pH);                                  // Recalculate the difference
+            double new_diff = PBE_error(pH);                       // Recalculate the difference
+
+            // Adjust learning rate based on the change in difference
+            if (new_diff < diff) {
+                learning_rate *= 1.05;  // Increase learning rate if getting closer
+            } else {
+                learning_rate *= 0.5;  // Decrease learning rate if getting further
+            }
+
+            diff = new_diff;  // Update the difference
         }
 
         if (diff > tol) {
@@ -269,7 +278,7 @@ int main() {
         pH = pbe.pH_calc(guess, false, 1500, 1e-5);
     }
     printf("----------------------------------------\n");
-    printf("The pH is: %.5f\n", pH);
+    printf("The pH is: %.12f\n", pH);
     printf("----------------------------------------\n");
     printf("Do you want a calculation report? (1 for yes, 0 for no): ");
     int report;

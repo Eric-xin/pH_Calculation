@@ -138,15 +138,24 @@ class CBE_calc {
 
         double pH = guess;
         double diff = Charge_diff(pH);
-        double learning_rate = 0.001;  // Stochastic Gradient Descent learning rate
+        double learning_rate = 0.001;  // Initial learning rate
         int max_iterations = 10000;    // Maximum number of iterations to prevent infinite loop
 
         for (int i = 0; i < max_iterations && diff > tol; ++i) {
             double gradient = (Charge_diff(pH + tol) - diff) / tol;  // Numerical gradient
             pH -= learning_rate * gradient;                          // Update pH using gradient descent
-            diff = Charge_diff(pH);                                  // Recalculate the difference
+            double new_diff = Charge_diff(pH);                       // Recalculate the difference
 
-            // printf("Iteration: %d, pH: %.5f, diff: %.5e, gradient: %.5e\n", i, pH, diff, gradient);
+            // Adjust learning rate based on the change in difference
+            if (new_diff < diff) {
+                learning_rate *= 1.05;  // Increase learning rate if getting closer
+            } else {
+                learning_rate *= 0.5;  // Decrease learning rate if getting further
+            }
+
+            diff = new_diff;  // Update the difference
+
+            // printf("Iteration: %d, pH: %.5f, diff: %.5e, gradient: %.5e, learning_rate: %.5e\n", i, pH, diff, gradient, learning_rate);
         }
 
         if (diff > tol) {
@@ -281,7 +290,7 @@ int main() {
         pH = cbe.pH_calc(guess, false, 1500, 1e-5);
     }
     printf("----------------------------------------\n");
-    printf("The pH is: %.5f\n", pH);
+    printf("The pH is: %.12f\n", pH);
     printf("----------------------------------------\n");
     // printf("Here is a digest of all the components:\n");
     // for (const auto& acid : s) {
